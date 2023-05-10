@@ -1,13 +1,55 @@
+// DOM elements
+const cardContainer = document.querySelector(".card-container");
+const buttons = document.querySelector(".buttons");
+
+// Global variables
+const URL = "https://api.disneyapi.dev/character";
+let nextPage, prevPage;
+
 // Helper functions
-const fetchData = () => {
-  fetch("https://api.disneyapi.dev/character")
+const renderInfo = (data) => {
+  data.forEach((char) => {
+    cardContainer.insertAdjacentHTML(
+      "afterbegin",
+      `
+        <article class="card">
+            <img src="${char.imageUrl}" alt="">
+            <p>${char.name}</p>
+            <p>${char.createdAt}</p>
+        </article>
+    `
+    );
+  });
+};
+
+const fetchData = (url) => {
+  if (url === null) return;
+
+  fetch(url)
     .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
+    .then((info) => {
+      console.log(info);
+
+      nextPage = info.info.nextPage;
+      prevPage = info.info.previousPage;
+
+      cardContainer.innerHTML = "";
+      renderInfo(info.data);
     });
 };
 
 // EventListeners
+buttons.addEventListener("click", (e) => {
+  if (e.target.classList.contains("prev-btn")) {
+    console.log("prev");
+    fetchData(prevPage);
+  }
+  if (e.target.classList.contains("next-btn")) {
+    console.log("next");
+    fetchData(nextPage);
+  }
+});
+
 window.addEventListener("load", () => {
-  fetchData();
+  fetchData(URL);
 });
