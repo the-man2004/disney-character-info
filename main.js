@@ -3,7 +3,7 @@ const cardContainer = document.querySelector(".card-container");
 const buttons = document.querySelector(".buttons");
 
 // Global variables
-const URL = "https://api.disneyapi.dev/character";
+const URL = "https://api.disneyapi.dev/character?pageSize=25";
 let nextPage, prevPage;
 
 // Helper functions
@@ -12,9 +12,13 @@ const renderInfo = (data) => {
     cardContainer.insertAdjacentHTML(
       "afterbegin",
       `
-        <li class="card">
-            <img src="${char.imageUrl}" alt="">
-            <p>${char.name}</p>
+        <li>
+          <div class="card">
+            <img src="${char.imageUrl}" alt="${char.name}">
+            <div class="char-info">
+              <p class="char-name">${char.name}</p>
+            </div>
+          </div>
         </li>
     `
     );

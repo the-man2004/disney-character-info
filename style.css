@@ -9,6 +9,7 @@
 :root {
   --dark-gray: rgb(37, 37, 37);
   --light-blue: #00beef;
+  --light-gray: rgb(226, 226, 226);
 }
 
 body {
@@ -19,6 +20,7 @@ body {
 nav {
   position: fixed;
   top: 0;
+  z-index: 1;
 
   height: 100px;
   width: 100%;
@@ -54,17 +56,51 @@ input {
 
 /* Card-container styling */
 .cards {
-  margin: 100px 10vw 100px 10vw;
-  padding-top: 50px;
-}
-
-.card {
-  list-style: none;
+  margin: 150px 10vw 100px 10vw;
 }
 
 /* Card styling */
+li {
+  list-style: none;
+}
+
+.card {
+  background-color: var(--light-gray);
+  margin-top: 50px;
+  border-radius: 25px;
+  display: flex;
+  cursor: pointer;
+
+  transition: scale 200ms ease-in-out;
+  transform: scale(1);
+
+  box-shadow: 0 1px 7px black;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
 img {
   width: 30vw;
   height: auto;
   object-position: center;
+  border-radius: 25px 0 0 25px;
+  border-right: 2px solid var(--light-blue);
+}
+
+.char-info {
+  width: 100%;
+  height: inherit;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.char-name {
+  font-size: 2rem;
+  padding: 10px 0 10px 0;
 }
