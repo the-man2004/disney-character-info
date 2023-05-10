@@ -8,11 +8,12 @@ let nextPage, prevPage;
 
 // Helper functions
 const renderInfo = (data) => {
+  cardContainer.innerHTML = "";
   data.forEach((char) => {
     cardContainer.insertAdjacentHTML(
       "afterbegin",
       `
-        <li>
+        <li id="${char.url}">
           <div class="card">
             <img src="${char.imageUrl}" alt="${char.name}">
             <div class="char-info">
@@ -23,10 +24,16 @@ const renderInfo = (data) => {
     `
     );
   });
+
+  buttons.style.display = "flex";
 };
 
 const fetchData = (url) => {
   if (url === null) return;
+
+  cardContainer.innerHTML = `
+    <h2>Loading...</h2>
+  `;
 
   fetch(url)
     .then((res) => res.json())
@@ -36,7 +43,6 @@ const fetchData = (url) => {
       nextPage = info.info.nextPage;
       prevPage = info.info.previousPage;
 
-      cardContainer.innerHTML = "";
       renderInfo(info.data);
     });
 };
@@ -44,11 +50,9 @@ const fetchData = (url) => {
 // EventListeners
 buttons.addEventListener("click", (e) => {
   if (e.target.classList.contains("prev-btn")) {
-    console.log("prev");
     fetchData(prevPage);
   }
   if (e.target.classList.contains("next-btn")) {
-    console.log("next");
     fetchData(nextPage);
   }
 });
