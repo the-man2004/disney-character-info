@@ -12,11 +12,10 @@ const renderInfo = (data) => {
     cardContainer.insertAdjacentHTML(
       "afterbegin",
       `
-        <article class="card">
+        <li class="card">
             <img src="${char.imageUrl}" alt="">
             <p>${char.name}</p>
-            <p>${char.createdAt}</p>
-        </article>
+        </li>
     `
     );
   });

@@ -17,12 +17,17 @@ body {
 
 /* Nav styles */
 nav {
+  position: fixed;
+  top: 0;
+
   height: 100px;
+  width: 100%;
   padding: 0 10vw 0 10vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
 
+  background-color: white;
   box-shadow: 0 1px 7px black;
 }
 
@@ -48,9 +53,18 @@ input {
 }
 
 /* Card-container styling */
+.cards {
+  margin: 100px 10vw 100px 10vw;
+  padding-top: 50px;
+}
+
+.card {
+  list-style: none;
+}
 
 /* Card styling */
 img {
   width: 30vw;
   height: auto;
+  object-position: center;
 }
